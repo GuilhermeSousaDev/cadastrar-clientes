@@ -1,7 +1,13 @@
 <?php
     include_once 'includes/message.php';
     include_once 'db_connect.php';
-    include_once 'includes/header.php';
+    include_once 'includes/header.php';   
+    if(isset($_GET['delete_id'])) {
+        $id = mysqli_escape_string($conn,$_GET['delete_id']);
+        $sql = "DELETE FROM clientes WHERE id = $id";
+        mysqli_query($conn,$sql);
+        header('Location:index.php');
+    }
 ?>
 <div class="row">
     <div class="col s12 m6 push-m3">
@@ -27,12 +33,12 @@
                     <td><?php echo $dados['email'];?></td>
                     <td><?php echo $dados['idade'];?></td>
                     <td>
-                        <a href="#" class="btn-floating orange">
+                        <a href="edit.php?id=<?php echo $dados['id']?>" class="btn-floating blue">
                             <i class="material-icons">edit</i>
                         </a>
                     </td>
                     <td>
-                        <a href="#" class="btn-floating red">
+                        <a name="delete" href="index.php?delete_id=<?php echo $dados['id']?>" class="btn-floating red">
                             <i class="material-icons">delete</i>
                         </a>
                     </td>
