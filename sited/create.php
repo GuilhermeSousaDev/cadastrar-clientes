@@ -3,9 +3,9 @@ session_start();
 include_once 'db_connect.php';
 function clear($input) {
     global $conn;
-    $var = mysqli_escape_string($conn,$input);
-    $var = htmlspecialchars($var);
-    return $var;
+    $sqlTratament = mysqli_escape_string($conn,$input);
+    $xssTratament = htmlspecialchars($sqlTratament);
+    return $xssTratament;
 }
 if(isset($_POST['btn-cadastrar'])) {
     $nome = clear($_POST['name']);
